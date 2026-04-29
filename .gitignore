@@ -1,0 +1,28 @@
+# Visual Studio 캐시 및 설정
+.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+
+# 빌드 및 배포 결과물
+publish/
+installer/
+
+# 기타 도구 설정
+.claude/
+
+
+# 이미지 파일 
+이미지/
+
+
+# bin 파일 
+# Employee_Directory/bin/
+
+
+# 배포파일(publish)
+publish/
+
+# 설치 (이노셋업 스크립트)
+setup.iss
