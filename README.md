@@ -58,7 +58,7 @@ Employee_Directory/
 |------|------|
 | 언어 | C# |
 | 프레임워크 | .NET WinForms |
-| DB | SQL Server |
+| DB | SQLite |
 | 아키텍처 | 3-Layer (Form → Service → Repository) |
 | 로깅 | 자체 구현 Logger (Helpers/Logger.cs) |
 
