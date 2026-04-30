@@ -66,31 +66,34 @@ namespace Employee_Directory.Forms
         {
             string fullPath = relativePath != null
                 ? Path.Combine(Config.Base, relativePath)
-                : NullImagePath;
+                : "";
 
+            // 파일없으면 리소스에서 바로 꺼내기
             if (!File.Exists(fullPath))
-                fullPath = NullImagePath;
-
-            if (File.Exists(fullPath))
             {
-                // Image.FromFile은 파일을 계속 잠금 — MemoryStream으로 읽어서 잠금 해제
-                //using var ms = new MemoryStream(File.ReadAllBytes(fullPath));
-                //picPhoto.Image = Image.FromStream(ms);
-
-                // 오류 예외처리 추가
-                try
-                {
-                    using var ms = new MemoryStream(File.ReadAllBytes(fullPath));
-                    picPhoto.Image = Image.FromStream(ms);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    using var ms = new MemoryStream(File.ReadAllBytes(NullImagePath));
-                    picPhoto.Image = Image.FromStream(ms);
-                }
-
+                picPhoto.Image = Properties.Resources.NullImage;
+                return;
             }
+
+           
+            // Image.FromFile은 파일을 계속 잠금 — MemoryStream으로 읽어서 잠금 해제
+            //using var ms = new MemoryStream(File.ReadAllBytes(fullPath));
+            //picPhoto.Image = Image.FromStream(ms);
+
+            // 오류 예외처리 추가
+            try
+            {
+                using var ms = new MemoryStream(File.ReadAllBytes(fullPath));
+                picPhoto.Image = Image.FromStream(ms);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Logger.Error($"사진 로드 실패 : {ex.Message}");
+                picPhoto.Image = Properties.Resources.NullImage;
+            }
+
+            
             
         }
 
